@@ -6,13 +6,16 @@ import { Provider } from "react-redux";
 import { Router } from "react-router-dom";
 import history from "./history";
 import { ChakraProvider } from "@chakra-ui/react";
+import store from "./states/store";
 ReactDOM.render(
   <React.StrictMode>
-    <Router history={history}>
-      <ChakraProvider>
-        <App />
-      </ChakraProvider>
-    </Router>
+    <Provider store={store}>
+      <Router history={history}>
+        <ChakraProvider>
+          <App />
+        </ChakraProvider>
+      </Router>
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );
