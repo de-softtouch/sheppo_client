@@ -5,7 +5,7 @@ export const axiosClient = axios.create({
 });
 // instance.defaults.timeout = 2500;
 
-axios.interceptors.request.use(
+axiosClient.interceptors.request.use(
   function (config) {
     return config;
   },
@@ -13,7 +13,7 @@ axios.interceptors.request.use(
     return Promise.reject(error);
   }
 );
-axios.interceptors.response.use(
+axiosClient.interceptors.response.use(
   function (response) {
     return response.data;
   },

@@ -46,9 +46,15 @@ function HeaderWithBanner() {
               justifyContent={"center"}
             >
               <Text>Did you buy a license yet?</Text>
-              <Button size={"sm"} variant={"unstyled"}>
+              <Text
+                _hover={{
+                  color: "white",
+                }}
+                cursor="pointer"
+                textDecoration={"underline"}
+              >
                 Check it out
-              </Button>
+              </Text>
             </HStack>
             <CloseButton
               onClick={() => setBanner(false)}
@@ -71,7 +77,9 @@ function HeaderWithBanner() {
               <Text
                 cursor="pointer"
                 onClick={() => {
-                  loggedIn ? history.push("/profile") : history.push("/login");
+                  loggedIn
+                    ? history.push("/user/account/profile")
+                    : history.push("/login");
                 }}
               >
                 {loggedIn ? user.fullName : "Log in"}
@@ -127,7 +135,11 @@ function HeaderWithBanner() {
             {/*<IconButton colorScheme={'white'} bg={'transparent'} aria-label='Search database'*/}
             {/*            icon={<AiOutlineShoppingCart size={'md'}/>}/>*/}
 
-            <Box align={"center"} position={"relative"}>
+            <Box
+              onClick={() => history.push("/cart")}
+              align={"center"}
+              position={"relative"}
+            >
               <AiOutlineShopping color={"white"} size={"30px"} />
               <Box
                 // bg={'red'}
