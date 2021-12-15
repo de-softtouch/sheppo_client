@@ -4,23 +4,64 @@ import {
   Link,
   Select,
   useColorModeValue,
+  InputGroup,
+  InputLeftAddon,
+  Input,
+  InputRightAddon,
+  InputLeftElement,
+  InputRightElement,
+  Box,
 } from "@chakra-ui/react";
+import { AddIcon, MinusIcon } from "@chakra-ui/icons";
+import {
+  removeItem,
+  updateItem,
+} from "../../../states/action_creators/cartCreator";
 import { CartProductMeta } from "./CartProductMeta";
 import { PriceTag } from "./PriceTag";
-
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useState } from "react";
 const QuantitySelect = (props) => {
+  const { id, qty } = props;
+  const dispatch = useDispatch();
+
   return (
-    <Select
-      maxW="64px"
-      aria-label="Select quantity"
-      focusBorderColor={useColorModeValue("blue.500", "blue.200")}
-      {...props}
-    >
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-    </Select>
+    <InputGroup cursor="pointer" size="sm">
+      <InputRightAddon
+        onClick={() => {
+          let temp = qty;
+          dispatch(updateItem(id, --temp));
+        }}
+        cursor="pointer"
+        children="-"
+      />
+      <Input
+        value={qty}
+        onChange={(e) => {
+          if (e && parseInt(e.target.value)) {
+            let q = parseInt(e.target.value);
+            dispatch(updateItem(id, q));
+          } else {
+            dispatch(updateItem(id, 1));
+          }
+        }}
+        type="value"
+        textAlign="center"
+        maxW="40px"
+        p="0"
+        m="0"
+        placeholder="1"
+      />
+      <InputLeftAddon
+        onClick={() => {
+          let temp = qty;
+          dispatch(updateItem(id, ++temp));
+        }}
+        cursor="pointer"
+        children="+"
+      />
+    </InputGroup>
   );
 };
 
@@ -28,14 +69,20 @@ export const CartItem = (props) => {
   const {
     isGiftWrapping,
     name,
+    standardPrice,
+    salesPrice,
+    qty,
+    coverImage,
     description,
     quantity,
-    imageUrl,
-    currency,
-    price,
     onChangeQuantity,
     onClickDelete,
+    id,
   } = props;
+  const dispatch = useDispatch();
+  const handleRemoveItem = () => {
+    dispatch(removeItem(id));
+  };
   return (
     <Flex
       direction={{
@@ -48,12 +95,13 @@ export const CartItem = (props) => {
       <CartProductMeta
         name={name}
         description={description}
-        image={imageUrl}
-        isGiftWrapping={isGiftWrapping}
+        image={coverImage}
+        isGiftWrapping={false}
       />
 
       {/* Desktop */}
       <Flex
+        px="5"
         width="full"
         justify="space-between"
         display={{
@@ -62,15 +110,16 @@ export const CartItem = (props) => {
         }}
       >
         <QuantitySelect
-          value={quantity}
+          id={id}
+          qty={qty}
           onChange={(e) => {
             onChangeQuantity?.(+e.currentTarget.value);
           }}
         />
-        <PriceTag price={price} currency={currency} />
+        <PriceTag price={standardPrice} currency={"VND"} />
         <CloseButton
           aria-label={`Delete ${name} from cart`}
-          onClick={onClickDelete}
+          onClick={() => handleRemoveItem()}
         />
       </Flex>
 
@@ -94,7 +143,7 @@ export const CartItem = (props) => {
             onChangeQuantity?.(+e.currentTarget.value);
           }}
         />
-        <PriceTag price={price} currency={currency} />
+        <PriceTag price={standardPrice} currency={"VND"} />
       </Flex>
     </Flex>
   );

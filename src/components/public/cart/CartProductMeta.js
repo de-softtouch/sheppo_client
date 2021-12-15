@@ -31,7 +31,8 @@ export const CartProductMeta = (props) => {
             {description}
           </Text>
         </Stack>
-        {isGiftWrapping && (
+
+        {true && (
           <HStack spacing="1" mt="3" color={mode("gray.600", "gray.400")}>
             <Icon as={FiGift} boxSize="4" />
             <Link fontSize="sm" textDecoration="underline">

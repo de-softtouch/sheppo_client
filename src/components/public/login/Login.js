@@ -27,15 +27,15 @@ const Login = () => {
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
 
-  useSelector((state) => {
-    const { loggedIn } = state.auth;
-    console.log(loggedIn);
-    if (loggedIn) {
-      history.replace("/");
-      return;
-    }
-    return;
-  });
+  // useSelector((state) => {
+  //   const { loggedIn } = state.auth;
+  //   console.log(loggedIn);
+  //   if (loggedIn) {
+  //     history.replace("/");
+  //     return;
+  //   }
+  //   return;
+  // });
 
   const handleLogin = (e) => {
     e.preventDefault();

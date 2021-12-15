@@ -18,44 +18,89 @@ function NewestProducts() {
   useEffect(() => {
     dispatch(fetchNewestProducts());
   }, []);
+  const mockData = [
+    {
+      id: 1,
+      name: "Lorem",
+      coverImage:
+        "https://images.pexels.com/photos/9980077/pexels-photo-9980077.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+      standardPrice: 100,
+      salesPrice: 95,
+      solid: 10,
+    },
+    {
+      id: 2,
+      name: "Lorem is sum 1",
+      coverImage:
+        "https://images.pexels.com/photos/9980077/pexels-photo-9980077.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+      standardPrice: 100,
+      salesPrice: 95,
+      solid: 10,
+    },
+    {
+      id: 3,
+      name: "Lorem 12",
+      coverImage:
+        "https://images.pexels.com/photos/9980077/pexels-photo-9980077.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+      standardPrice: 100,
+      salesPrice: 95,
+      solid: 10,
+    },
+    {
+      id: 4,
+      name: "Lorem 42",
+      coverImage:
+        "https://images.pexels.com/photos/9980077/pexels-photo-9980077.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+      standardPrice: 100,
+      salesPrice: 95,
+      solid: 10,
+    },
+    {
+      id: 5,
+      name: "Lorem 1",
+      coverImage:
+        "https://images.pexels.com/photos/9980077/pexels-photo-9980077.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+      standardPrice: 100,
+      salesPrice: 95,
+      solid: 10,
+    },
+  ];
   return (
     <>
-      {isFetching ? (
+      {/* {isFetching ? (
         <LoaderProgress />
-      ) : (
-        <SimpleGrid columns={{ base: 2, md: 6 }} spacing={2}>
-          {products &&
-            products.map((p, i) => (
-              <Box
-                onClick={() => history.push("/products/1")}
-                key={i}
-                bg="white"
+      ) : ( */}
+      <SimpleGrid columns={{ base: 2, md: 6 }} spacing={2}>
+        {/* {products &&
+            products.map((p, i) => ( */}
+        {mockData &&
+          mockData.map((p, i) => (
+            <Box
+              onClick={() => history.push(`/products/${p.id}`)}
+              key={i}
+              bg="white"
+            >
+              <AspectRatio height="200" ratio={{ base: 16 / 9, md: 1 }}>
+                <Image src="https://images.pexels.com/photos/9980077/pexels-photo-9980077.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" />
+              </AspectRatio>
+              <Flex
+                justifyContent="space-between"
+                direction="column"
+                px="2"
+                py="1"
               >
-                <AspectRatio height="200" ratio={{ base: 16 / 9, md: 1 }}>
-                  <Image src="https://images.pexels.com/photos/9980077/pexels-photo-9980077.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" />
-                </AspectRatio>
-                <Flex
-                  justifyContent="space-between"
-                  direction="column"
-                  px="2"
-                  py="1"
-                >
-                  <Text fontWeight="medium" fontSize="15">
-                    {p.name}
-                  </Text>
-                  <Flex
-                    fontSize="14"
-                    w={"100%"}
-                    justifyContent={"space-between"}
-                  >
-                    <Text>{p.standardPrice}</Text>
-                    <Text>Solid 10</Text>
-                  </Flex>
+                <Text fontWeight="medium" fontSize="15">
+                  {p.name}
+                </Text>
+                <Flex fontSize="14" w={"100%"} justifyContent={"space-between"}>
+                  <Text>{p.standardPrice}</Text>
+                  <Text>Solid 10</Text>
                 </Flex>
-              </Box>
-            ))}
-        </SimpleGrid>
-      )}
+              </Flex>
+            </Box>
+          ))}
+      </SimpleGrid>
+      {/* )} */}
     </>
   );
 }

@@ -3,8 +3,14 @@ import { Box, Flex, Heading, HStack, Link, Stack } from "@chakra-ui/react";
 import { cartData } from "./cartData";
 import { CartItem } from "./CartItem";
 import { CartOrderSummary } from "./OrderSummaryItem";
-
+import { useSelector, useDispatch } from "react-redux";
+import { Link as RLink } from "react-router-dom";
+import history from "../../../history";
 const Cart = () => {
+  const dispatch = useDispatch();
+
+  const cart = useSelector((state) => state.cart);
+  console.log(cart);
   return (
     <>
       <Box
@@ -47,9 +53,7 @@ const Cart = () => {
             </Heading>
 
             <Stack spacing="6">
-              {cartData.map((item) => (
-                <CartItem key={item.id} {...item} />
-              ))}
+              {cart && cart.map((item) => <CartItem key={item.id} {...item} />)}
             </Stack>
           </Stack>
 
@@ -57,7 +61,9 @@ const Cart = () => {
             <CartOrderSummary />
             <HStack mt="6" fontWeight="semibold">
               <p>or</p>
-              <Link color={"blue.500"}>Continue shopping</Link>
+              <Link onClick={() => history.push("/")} color={"blue.500"}>
+                Continue shopping
+              </Link>
             </HStack>
           </Flex>
         </Stack>

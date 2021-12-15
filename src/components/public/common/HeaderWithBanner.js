@@ -15,6 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { AiOutlineShopping, BiSearch } from "react-icons/all";
 import { useDispatch, useSelector } from "react-redux";
+import Cart from "./Cart";
 import history from "../../../history";
 function HeaderWithBanner() {
   const [banner, setBanner] = useState(true);
@@ -98,7 +99,7 @@ function HeaderWithBanner() {
             m={"auto"}
           >
             <Heading
-              onClick={() => history.push("/login")}
+              onClick={() => history.push("/")}
               cursor={"pointer"}
               color={"white"}
               letterSpacing={1}
@@ -135,43 +136,8 @@ function HeaderWithBanner() {
             {/*<IconButton colorScheme={'white'} bg={'transparent'} aria-label='Search database'*/}
             {/*            icon={<AiOutlineShoppingCart size={'md'}/>}/>*/}
 
-            <Box
-              onClick={() => history.push("/cart")}
-              align={"center"}
-              position={"relative"}
-            >
-              <AiOutlineShopping color={"white"} size={"30px"} />
-              <Box
-                // bg={'red'}
-                position={"absolute"}
-                right={"-10px"}
-                top={0}
-                w={"20px"}
-                borderRadius={"lg"}
-                h={"20px"}
-                align={"center"}
-                justifySelf={"center"}
-                justifyContent={"center"}
-                alignItems={"center"}
-                alignSelf={"center"}
-                alignItems={"center"}
-                textAlign={"center"}
-                justifyItems={"center"}
-              >
-                <Text
-                  color={"white"}
-                  align={"center"}
-                  justifySelf={"center"}
-                  justifyContent={"center"}
-                  alignItems={"center"}
-                  alignSelf={"center"}
-                  alignItems={"center"}
-                  textAlign={"center"}
-                  justifyItems={"center"}
-                >
-                  1
-                </Text>
-              </Box>
+            <Box align={"center"} position={"relative"}>
+              <Cart />
             </Box>
           </Flex>
         </Box>

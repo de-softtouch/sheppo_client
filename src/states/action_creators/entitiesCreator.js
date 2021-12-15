@@ -2,15 +2,14 @@ import entitiesService from "../../service/entitiesService";
 import { EntityActionType, MessageActionType } from "../actionType";
 
 export const fetchNewestProducts = () => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch({ type: EntityActionType.FETCH_NEWEST_PRODUCT_REQUEST });
     try {
-      entitiesService.fetchNewestProducts().then((data) =>
-        dispatch({
-          type: EntityActionType.FETCH_NEWEST_PRODUCT_SUCCESS,
-          payload: data,
-        })
-      );
+      const data = await entitiesService.fetchNewestProducts();
+      dispatch({
+        type: EntityActionType.FETCH_NEWEST_PRODUCT_SUCCESS,
+        payload: data,
+      });
     } catch (e) {
       dispatch({
         type: EntityActionType.FETCH_NEWEST_PRODUCT_FAILURE,
