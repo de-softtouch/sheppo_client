@@ -22,7 +22,12 @@ import {
 } from "@chakra-ui/react";
 import NewestProducts from "./NewestProducts";
 import { FaArrowRight } from "react-icons/fa";
+import Categories from "./Categories";
 function Home() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    document.title = "Sheppo";
+  }, []);
   return (
     <Box w="100%" bg="gray.100">
       <Box height={5} />
@@ -40,8 +45,12 @@ function Home() {
       </Grid>
       {/*BIG BANNER SECTION*/}
       <Box
+        // px="5"
+        mx="5"
+        my="4"
+        bg="white"
         maxW="7xl"
-        mx="auto"
+        // mx="auto"
         px={{ base: "0", lg: "12" }}
         py={{ base: "0", lg: "12" }}
       >
@@ -113,57 +122,14 @@ function Home() {
       </Box>
       {/*END OF BIG BANNER*/}
       {/*CATEGORY*/}
-      <Box p={5}>
-        <Flex
-          w={"95%"}
-          justifyContent={"space-between"}
-          direction={"row"}
-          mb={3}
-        >
-          <Text fontWeight={"bold"}>CATEGORY</Text>
-          <Text>
-            <Link to={"/"}>More</Link>
-          </Text>
-        </Flex>
-        <SimpleGrid columns={10} gap={2} justifyItems={"center"}>
-          {[1, 2, 3, 4, 5, 5, 1, 1, 1, 11, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1].map(
-            (item, i) => (
-              <Box
-                onClick={() => history.push("/products")}
-                cursor={"pointer"}
-                textAlign={"center"}
-                key={i}
-                borderRadius={"md"}
-                position={"relative"}
-              >
-                <AspectRatio borderRadius={"md"} w={"100px"} ratio={1}>
-                  <Image
-                    borderRadius={"md"}
-                    src="https://images.pexels.com/photos/792345/pexels-photo-792345.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                    alt="Segun Adebayo"
-                  />
-                </AspectRatio>
-                <Text
-                  alignItems={"center"}
-                  alignSelf={"center"}
-                  w={"100%"}
-                  fontWeight={"bold"}
-                  position={"absolute"}
-                  bottom={"0"}
-                >
-                  Electronic
-                </Text>
-              </Box>
-            )
-          )}
-        </SimpleGrid>
+      <Box p={5} bg="white" mx="5">
+        <Categories />
       </Box>
       {/*END OF CATEGORY*/}
       <SimpleThreeColumns />
       <Box h={"5vh"} />
       <CaptionCarousel />
       {/* NEWEST PRODUCT */}
-      <Heading>For you</Heading>
       <Box p="5">
         <NewestProducts />
       </Box>

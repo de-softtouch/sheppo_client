@@ -21,13 +21,19 @@ import {
   Text,
   VStack,
   useDisclosure,
+  Icon,
   Modal,
+  SimpleGrid,
   ModalOverlay,
   ModalContent,
   ModalHeader,
   ModalFooter,
   ModalBody,
   ModalCloseButton,
+  ButtonGroup,
+  Avatar,
+  Wrap,
+  WrapItem,
 } from "@chakra-ui/react";
 import Slider from "react-slick";
 import {
@@ -76,30 +82,25 @@ const ProductDetails = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   useEffect(() => {
     document.title = "Product Details";
+    // window.scrollTo(0, 0);
   }, []);
   return (
     <>
-      <Flex direction="column" w={"100%"} minH={"100vh"} bg={"white"}>
-        <Flex w={"100%"}>
-          <Box flex={5} w={"100%"} bg={"white"}>
-            <VStack align={"start"} spacing={5} p={10} w={"100%"} bg={"white"}>
+      <Flex direction="column" bg="gray.100" w={"100%"} minH={"100vh"}>
+        <Flex w={"100%"} bg="gray.100" p="5">
+          <Box p="5" flex={5} bg="white" w={"100%"}>
+            <VStack align={"start"} spacing={5} w={"100%"}>
               <VStack spacing={2} w={"100%"}>
-                {/* <HStack spacing={2} w={"100%"}>
-                <Text color={"blue.500"}>Rating</Text>
-                <HStack spacing={1}>
-                  {[1, 2, 3, 4, 5].map((item, i) => (
-                    <StarIcon
-                      key={i}
-                      color={i < 3 ? "orange.200" : "gray.200"}
-                    />
-                  ))}
-                </HStack>
-              </HStack> */}
+                {/* RATING */}
                 <RatedStart id={100} />
+                {/* RATING */}
               </VStack>
+              {/* NAME */}
               <Heading fontSize={"xx-large"} textColor={"gray.700"}>
                 Product Name
               </Heading>
+              {/* NAME */}
+
               <HStack spacing={2}>
                 <Text textDecoration={"line-through"} color={"gray.800"}>
                   $100
@@ -239,11 +240,11 @@ const ProductDetails = () => {
                 </Button>
               </Box>
               {/*END OF QUANTITY*/}
-              {/*DESCRIPTION*/}
             </VStack>
           </Box>
-          <Box flex={7} bg={"white"}>
-            <Flex w={"100%"} p={10}>
+          {/* IMAGES */}
+          <Box flex={7} bg={"white"} p="5" pl="10">
+            <Flex w={"100%"}>
               <Box flex={10}>
                 <AspectRatio maxW="450px" ratio={1}>
                   {/* <iframe
@@ -254,7 +255,7 @@ const ProductDetails = () => {
                   <Image
                     boxSize="100px"
                     objectFit="cover"
-                    src="https://bit.ly/dan-abramov"
+                    src="https://images.pexels.com/photos/3586249/pexels-photo-3586249.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
                     alt="Dan Abramov"
                   />
                 </AspectRatio>
@@ -262,13 +263,52 @@ const ProductDetails = () => {
               <Box flex={2}></Box>
             </Flex>
           </Box>
+          {/* END OF IMAGES */}
         </Flex>
-        {/* <Divider /> */}
-
+        {/* SHOP INFO */}
+        <Box mx="5">
+          <Box p="5" bg="white" w="100%">
+            <HStack w="100%" spacing={6}>
+              <Avatar
+                size="xl"
+                name="shop avatar"
+                src="https://images.pexels.com/photos/10311051/pexels-photo-10311051.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+              />
+              <VStack align={"start"}>
+                <Text color="orange" fontWeight="medium" fontSize="large">
+                  NKD
+                </Text>
+                <Text>Active 25m ago</Text>
+                <ButtonGroup size="sm">
+                  <Button>Chat</Button>
+                  <Button
+                    onClick={() => {
+                      history.push("/shop");
+                    }}
+                    variant="outline"
+                  >
+                    View Shop
+                  </Button>
+                </ButtonGroup>
+              </VStack>
+              <Divider minH="80px" mx="10" px="10" orientation="vertical" />
+              <SimpleGrid columns="3" spacing="5">
+                {[1, 2, 3, 3, 3, 3].map((item, i) => (
+                  <HStack>
+                    <Text color="gray.700">Ratings</Text>
+                    <Text color="orange">3,8k</Text>
+                  </HStack>
+                ))}
+              </SimpleGrid>
+              {/* SHOP INFO */}
+            </HStack>
+          </Box>
+        </Box>
+        {/*END OF SHOP INFO */}
         {/* DESCRIPTION */}
-        <Flex direction="column" bg="white" px={10} w={"100%"}>
+        <Flex bg="white" direction="column" p="5" m={5}>
           <Heading fontSize={"large"}>Description</Heading>
-          <Divider my="2" />
+          <Divider my="5" />
           {/*END OF DESCRIPTION*/}
           <Skeleton isLoaded={true}>
             <Text>
@@ -280,13 +320,73 @@ const ProductDetails = () => {
           </Skeleton>
         </Flex>
         {/*RELATED PRODUCT*/}
-        <Box p={10} w={"100%"} bg={"white"}>
-          <Flex w={"100%"} justifyContent={"start"} direction="column">
+        <Box bg="white" p={5} m="5">
+          <Flex justifyContent={"start"} direction="column">
             <Heading fontSize={"large"}>Related Products</Heading>
-            <Divider my="2" />
+            <Divider my="5" />
             <HStack></HStack>
           </Flex>
         </Box>
+        {/* RATINGS SECTION */}
+        <Box bg="white" p={5} m="5">
+          <Heading fontSize={"large"}>Product Ratings</Heading>
+          {/* FILTER */}
+          <HStack my="5" spacing={10} bg="gray.200" p="5">
+            <VStack align="start">
+              <Text>4 out of 5</Text>
+              <HStack align="start">
+                {[1, 2, 3, 4, 5].map((item, i) => (
+                  <Icon boxSize="18px" as={StarIcon} key={i} />
+                ))}
+              </HStack>
+            </VStack>
+            <ButtonGroup size="sm" variant="outline">
+              <Wrap maxW="800px">
+                {[1, 1, 1, 1, , 1, 1, 1, 1].map((item, i) => (
+                  <WrapItem key={i}>
+                    <Button>5 Starts</Button>
+                  </WrapItem>
+                ))}
+              </Wrap>
+            </ButtonGroup>
+          </HStack>
+          {/* END OF RATINGS FILTER */}
+          <VStack align="start">
+            {[1, 2, 3, 4, 5].map((item, i) => (
+              <HStack key="i" align="start">
+                <Avatar
+                  src="https://images.pexels.com/photos/9873868/pexels-photo-9873868.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+                  size="sm"
+                />
+                <VStack align="start">
+                  <Text fontWeight="medium">Mia Nguyen</Text>
+                  <HStack align="start">
+                    {[1, 2, 3, 4, 5].map((item, i) => (
+                      <Icon boxSize="10px" as={StarIcon} key={i} />
+                    ))}
+                  </HStack>
+                  <Text>Amazing good job!</Text>
+                  <HStack></HStack>
+                  <HStack>
+                    {[1, 2, 3].map((item, i) => (
+                      <Image
+                        boxSize="80px"
+                        objectFit="cover"
+                        src="https://images.pexels.com/photos/5384423/pexels-photo-5384423.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+                        alt="img"
+                      />
+                    ))}
+                  </HStack>
+                  <Text fontSize="small" color="gray.400">
+                    2021-11-29 07:54
+                  </Text>
+                  <Divider />
+                </VStack>
+              </HStack>
+            ))}
+          </VStack>
+        </Box>
+        {/* RATINGS SECTION */}
       </Flex>
       {/* MODAL */}
 

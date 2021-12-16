@@ -4,7 +4,7 @@ import React from "react";
 
 const Feature = ({ title, text, icon }) => {
   return (
-    <Stack>
+    <Stack bg="white" p="4">
       <Flex
         w={16}
         h={16}

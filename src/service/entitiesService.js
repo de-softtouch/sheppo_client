@@ -19,6 +19,12 @@ const entitiesService = {
     });
     return data;
   },
+
+  fetchCategories: async () => {
+    const url = "/api/v1/public/categories";
+    const data = await axiosClient.get(url);
+    return data;
+  },
 };
 
 export default entitiesService;

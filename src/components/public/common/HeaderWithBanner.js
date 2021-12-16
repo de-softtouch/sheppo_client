@@ -67,7 +67,7 @@ function HeaderWithBanner() {
         )}
         {/*END OF BANNER*/}
         {/*TOP NAV*/}
-        <Box bg={"tomato"} w={"100%"} px={5}>
+        <Box bg={"gray.700"} w={"100%"} px={5}>
           <Flex justifyContent={"space-between"} w={"100%"}>
             <HStack color={"white"} cursor={"pointer"}>
               <Text>Kenh nguoi ban| </Text>

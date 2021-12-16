@@ -1,4 +1,5 @@
 import { CartActionType } from "../actionType";
+import { toast } from "react-toastify";
 export const addToCart = (id) => {
   return async (dispatch, getState) => {
     dispatch({
@@ -29,6 +30,16 @@ export const removeItem = (id) => {
       payload: id,
     });
     saveCart(getState);
+    toast(`Product has been removed!`, {
+      position: "bottom-left",
+      autoClose: 1000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: 0,
+      theme: "light",
+    });
   };
 };
 
